@@ -5,6 +5,7 @@
         <p id="web-icon">WebProg.ir</p>
         <router-link :to="{name:'HomePage'}" class="router-link" style="margin-left:30px">Home</router-link>
         <router-link :to="{name:'UsersPage'}" class="router-link">Users</router-link>
+        <router-link :to="{name:'PostsPage'}" class="router-link">Posts</router-link>
       </div>
     </div>
     <router-view style="margin-left:30px; margin-top:5px;"></router-view>
