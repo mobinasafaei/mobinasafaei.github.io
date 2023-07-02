@@ -1,14 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router"
-import HomePage from "./components/HomePage.vue"
-import UsersPage from "./components/UsersPage.vue"
-import PostsPage from "./components/PostsPage.vue"
-import NotFound from "./components/NotFound.vue"
+import HomePage from "./pages/HomePage.vue"
+import UsersPage from "./pages/users/UsersPage.vue"
+import ShowUser from "./pages/users/ShowUser.vue"
+import PostsPage from "./pages/PostsPage.vue"
+import NotFound from "./pages/NotFound.vue"
 
 const routes = [
-    { path: '/', name: "HomePage", component: HomePage },
-    { path: '/users', name: "UsersPage", component: UsersPage },
-    { path: '/posts', name: "PostsPage", component: PostsPage },
-    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
+    { path: '/', name: "homepage", component: HomePage },
+    { path: '/users', name: "userspage", component: UsersPage },
+    { path: '/users/:id', name: "showuser", component: ShowUser },
+    { path: '/posts', name: "postspage", component: PostsPage },
+    { path: '/:pathMatch(.*)*', name: "notfound", component: NotFound },
 
 ]
 
