@@ -1,34 +1,50 @@
 <template>
   <div>
-    <h1>Users</h1>
+    <h1 class="d-inline">Users</h1>
+    <button
+      @click="goUsersPage()"
+      type="button"
+      class="btn btn-dark float-end me-4 mt-2"
+      v-if="idExist"
+    >back</button>
+    <hr />
     <div class="row g-3" v-if="!idExist">
-      <div v-if="loading" class="spinner-border text-secondary" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
+      <loadingView v-if="loading"></loadingView>
       <div v-else class="col-md-3" v-for="user in users" :key="user.id">
         <UserCard :user="user" />
       </div>
+    </div>
+    <div v-else>
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
 import UserCard from "@/components/users/UserCard.vue";
+import LoadingView from "@/components/LoadingView.vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
+import router from "../../router";
 
 export default {
-  components: { UserCard },
+  components: { UserCard, LoadingView },
   data() {
     return {
       users: [],
-      loading: true,
-      idExist: false
+      loading: true
     };
   },
   mounted() {
     this.getusersData();
-    this.changeIdStatus();
+  },
+  computed: {
+    idExist() {
+      if (useRoute().params.id !== undefined) {
+        return true;
+      }
+      return false;
+    }
   },
   methods: {
     getusersData() {
@@ -42,10 +58,8 @@ export default {
           console.log(error);
         });
     },
-    changeIdStatus() {
-      if (useRoute().params.id !== undefined) {
-        this.idExist = true;
-      }
+    goUsersPage() {
+      router.push({ name: "userspage" });
     }
   }
 };

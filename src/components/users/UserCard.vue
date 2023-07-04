@@ -18,19 +18,12 @@
 import { useRoute } from "vue-router";
 export default {
   props: { user: Object },
-  data() {
-    return {
-      idExist: false
-    };
-  },
-  mounted() {
-    this.changeIdStatus();
-  },
-  methods: {
-    changeIdStatus() {
+  computed: {
+    idExist() {
       if (useRoute().params.id !== undefined) {
-        this.idExist = true;
+        return true;
       }
+      return false;
     }
   }
 };

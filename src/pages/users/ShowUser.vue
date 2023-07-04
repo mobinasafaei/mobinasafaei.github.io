@@ -1,10 +1,7 @@
 <template>
   <div>
-    <h1>Users</h1>
     <div class="row g-3">
-      <div v-if="loading" class="spinner-border text-secondary" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
+      <LoadingView v-if="loading"></LoadingView>
       <div v-else class="col-md-3">
         <UserCard :user="user" />
       </div>
@@ -14,12 +11,12 @@
   
 <script>
 import UserCard from "@/components/users/UserCard.vue";
+import LoadingView from "@/components/LoadingView.vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
-// import { useRoute } from "vue-router";
 
 export default {
-  components: { UserCard },
+  components: { UserCard, LoadingView },
   data() {
     return {
       user: {},
