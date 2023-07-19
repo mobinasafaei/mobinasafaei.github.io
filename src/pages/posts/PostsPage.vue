@@ -5,10 +5,12 @@
       @click="goPostsPage()"
       type="button"
       class="btn btn-dark float-end me-4 mt-2"
-      v-if="idExist"
+      v-if="idExist && !routePathEqualsEdit"
     >back</button>
     <hr class="w-100 me-2" />
-    <div v-if="!idExist">
+
+    <div v-if="!idExist && !routePathEqualsCreate">
+      <router-link :to="{name:'createpost'}" class="btn btn-dark mb-3">New Post</router-link>
       <div class="row g-3">
         <loadingView v-if="loading"></loadingView>
         <div class="col-md-6" v-for="post in posts" :key="post.id">
@@ -16,7 +18,7 @@
         </div>
       </div>
     </div>
-    <router-view v-if="idExist"></router-view>
+    <router-view v-else></router-view>
   </div>
 </template>
 
@@ -41,6 +43,18 @@ export default {
   computed: {
     idExist() {
       if (useRoute().params.id !== undefined) {
+        return true;
+      }
+      return false;
+    },
+    routePathEqualsCreate() {
+      if (this.$route.name== "createpost") {
+        return true;
+      }
+      return false;
+    },
+    routePathEqualsEdit() {
+      if (this.$route.name == "editpage") {
         return true;
       }
       return false;
