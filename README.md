@@ -1,3 +1,3 @@
-# this is my first project with vue.js
+# this is my first-mini-project project with vue.js
 
 
